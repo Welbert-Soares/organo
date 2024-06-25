@@ -2,40 +2,66 @@ import "./Formulario.css";
 import CampoTexto from "../CampoTexto";
 import ListaSuspensa from "../ListaSuspensa";
 import Botao from "../Botao";
+import { useState } from "react";
 
-const Formulario = () => {
+const Formulario = (props) => {
   const times = [
-    'Programação',
-    'Front-end',
-    'Data Science',
-    'Devops',
-    'Ux e Design',
-    'Mobile',
-    'Back-end',
-    'Inovação e Gestão',
-  ]
+    "Programação",
+    "Front-end",
+    "Data Science",
+    "Devops",
+    "Ux e Design",
+    "Mobile",
+    "Back-end",
+    "Inovação e Gestão",
+  ];
 
+  const [nome, setNome] = useState("");
+  const [cargo, setCargo] = useState("");
+  const [imagem, setImagem] = useState("");
+  const [time, setTime] = useState("");
 
   const aoSalvar = (evento) => {
-    evento.preventDefault()
+    evento.preventDefault();
 
-    console.log("Salvando...")
-  }
+    props.aoColaboradorCadastrado({
+      nome,
+      cargo,
+      imagem,
+      time
+    })
+  };
 
   return (
-
-
     <div>
       <section className="formulario">
-        <form onSubmit={aoSalvar} >
+        <form onSubmit={aoSalvar}>
           <h2>Preencha os dados para criar o card do colaborador</h2>
-          <CampoTexto obrigatorio={true} label="Nome" />
-          <CampoTexto obrigatorio={true} label="Cargo" />
-          <CampoTexto label="Imagem" />
-          <ListaSuspensa obrigatorio={true} label="Time" itens={times} />
-          <Botao>
-            Criar Card
-          </Botao>
+          <CampoTexto
+            obrigatorio={true}
+            label="Nome"
+            valor={nome}
+            aoAlterado={(valor) => setNome(valor)}
+          />
+          <CampoTexto
+            obrigatorio={true}
+            label="Cargo"
+            valor={cargo}
+            aoAlterado={(valor) => setCargo(valor)}
+          />
+          <CampoTexto
+            label="Imagem"
+            valor={imagem}
+            aoAlterado={(valor) => setImagem(valor)}
+          />
+          <ListaSuspensa 
+            obrigatorio={true} 
+            label="Time" 
+            itens={times} 
+            valor={time}
+            aoAlterado={valor => setTime(valor)}
+          />
+          <Botao>Criar Card</Botao>
         </form>
       </section>
     </div>
