@@ -12,7 +12,6 @@ const Formulario = (props) => {
     "Devops",
     "Ux e Design",
     "Mobile",
-    "Back-end",
     "Inovação e Gestão",
   ];
 
